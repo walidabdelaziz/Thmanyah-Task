@@ -29,9 +29,22 @@
 		CBFEB8492E54EB6700D28D79 /* Thmanyah-TaskUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Thmanyah-TaskUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CBFEB9482E5522B800D28D79 /* Exceptions for "Thmanyah-Task" folder in "Thmanyah-Task" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CBFEB8312E54EB6400D28D79 /* Thmanyah-Task */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CBFEB8342E54EB6400D28D79 /* Thmanyah-Task */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CBFEB9482E5522B800D28D79 /* Exceptions for "Thmanyah-Task" folder in "Thmanyah-Task" target */,
+			);
 			path = "Thmanyah-Task";
 			sourceTree = "<group>";
 		};
@@ -400,6 +413,7 @@
 				DEVELOPMENT_TEAM = 24239CYBDQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Thmanyah-Task/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Thmanyah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -429,6 +443,7 @@
 				DEVELOPMENT_TEAM = 24239CYBDQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Thmanyah-Task/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Thmanyah;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
