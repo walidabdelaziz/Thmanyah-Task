@@ -15,7 +15,7 @@ struct QueueContentCell: View {
               ImageLoaderView(image: content.avatarURL ?? "")
                   .frame(width: .dynamicSize(),height: .dynamicSize())
 
-              infoView
+              contentInfoSection
                   .frame(maxWidth: .infinity,alignment: .leading)
           }
           .foregroundStyle(.appWhite)
@@ -32,7 +32,7 @@ struct QueueContentCell: View {
           }
       }
     
-    private var infoView: some View {
+    private var contentInfoSection: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(content.name ?? "")
                 .font(.ibmBold(.caption))

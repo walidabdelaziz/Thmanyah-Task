@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DurationView: View {
     var duration: Int = 5
+    var fontTextStyle: Font.TextStyle = .caption
     var body: some View {
         HStack(spacing: 4){
             Image(systemName: "play.fill")
             Text("\(duration.asDurationReadable)")
                 .lineLimit(1)
         }
-        .font(.ibmRegular(.caption))
+        .font(.ibmRegular(fontTextStyle))
         .padding(.vertical, 4)
         .padding(.horizontal, 10)
         .foregroundStyle(.appWhite)
