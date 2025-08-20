@@ -9,13 +9,11 @@ import SwiftUI
 
 struct ContentSquareCell: View {
     var content: ContentEntity = .mock
-    var imageWidth: CGFloat = 150
-    var imageHeight: CGFloat = 150
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4){
             ImageLoaderView(image: content.avatarURL ?? "")
-                .frame(width: imageWidth, height: imageHeight)
+                .aspectRatio(1, contentMode: .fit)
                 .cornerRadius(Constants.CORNER_RADIUS)
             
             Text(content.name ?? "")
@@ -23,8 +21,6 @@ struct ContentSquareCell: View {
                 .lineLimit(1)
                 .font(.ibmMedium(.caption))
                 .padding(.horizontal, 4)
-            
-            
             
             HStack(spacing: 4) {
                 DurationView(duration: content.duration ?? 0)
@@ -36,9 +32,7 @@ struct ContentSquareCell: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
             }
-
         }
-        .frame(width: imageWidth)
     }
 }
 
