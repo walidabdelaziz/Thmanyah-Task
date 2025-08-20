@@ -5,6 +5,8 @@
 //  Created by Walid Ahmed on 19/08/2025.
 //
 
+import Foundation
+
 struct SectionsResponseEntity: Hashable {
     var sections: [SectionEntity]?
     var pagination: PaginationEntity?
@@ -26,7 +28,8 @@ struct SectionEntity: Hashable {
     }
 }
 
-struct ContentEntity: Hashable {
+struct ContentEntity: Hashable, Identifiable {
+    let id = UUID().uuidString
     var podcastID, name, description: String?
     var avatarURL: String?
     var episodeCount, duration: Int?
