@@ -14,8 +14,11 @@ struct HomeScreen: View {
             Color.appBlack.ignoresSafeArea()
             
             ScrollView(.vertical, showsIndicators: false){
+                
                 LazyVStack{
+                    
                     headerView
+                    
                     
                     if let sections = vm.homeResponse.sections {
                         ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
@@ -32,9 +35,15 @@ struct HomeScreen: View {
                                     LazyHStack(spacing: 12) {
                                         ForEach(section.content ?? [], id: \.self) { content in
                                             switch section.type {
+            
                                             case "square":
                                                 ContentSquareCell(content: content)
-                                    
+                                                    .frame(width: UIScreen.main.bounds.width / 3.2)
+
+                                            case "queue":
+                                                ContentQueueCell(content: content)
+                                                    .frame(width: UIScreen.main.bounds.width * 0.75)
+
                                             default:
                                                 EmptyView()
                                             }
@@ -86,4 +95,3 @@ struct HomeScreen: View {
 #Preview {
     HomeScreen()
 }
-
