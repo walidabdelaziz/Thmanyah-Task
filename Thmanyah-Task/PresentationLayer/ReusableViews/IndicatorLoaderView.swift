@@ -9,15 +9,19 @@ import SwiftUI
 
 struct IndicatorLoaderView: View {
     var body: some View {
-        HStack {
-            Spacer()
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .appRed))
-                .scaleEffect(1.8)
-            Spacer()
+        ZStack{
+            Color.black.opacity(0.2).ignoresSafeArea()
         }
-        .padding()
-        .background(Color.appDarkBlueGray.opacity(0.00001))
+        .overlay {
+            HStack {
+                Spacer()
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .appRed))
+                    .scaleEffect(1.8)
+                Spacer()
+            }
+            .padding()
+        }
     }
 }
 
