@@ -1,5 +1,5 @@
 //
-//  ContentQueueCell.swift
+//  QueueContentCell.swift
 //  Thmanyah-Task
 //
 //  Created by Walid Ahmed on 20/08/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentQueueCell: View {
+struct QueueContentCell: View {
     var content: ContentEntity = .mock
     
     var body: some View {
@@ -60,6 +60,6 @@ struct ContentQueueCell: View {
 #Preview {
     ZStack{
         Color.black.ignoresSafeArea()
-        ContentQueueCell()
+        QueueContentCell()
     }
 }

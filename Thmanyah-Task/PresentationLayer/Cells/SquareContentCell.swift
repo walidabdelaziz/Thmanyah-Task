@@ -1,5 +1,5 @@
 //
-//  ContentSquareCell.swift
+//  SquareContentCell.swift
 //  Thmanyah-Task
 //
 //  Created by Walid Ahmed on 20/08/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentSquareCell: View {
+struct SquareContentCell: View {
     var content: ContentEntity = .mock
 
     var body: some View {
@@ -39,7 +39,7 @@ struct ContentSquareCell: View {
 #Preview {
     ZStack{
         Color.black.ignoresSafeArea()
-        ContentSquareCell()
+        SquareContentCell()
     }
 }
 

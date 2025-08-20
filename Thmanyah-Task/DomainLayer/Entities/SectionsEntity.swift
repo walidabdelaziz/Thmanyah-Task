@@ -19,6 +19,11 @@ struct SectionEntity: Hashable {
     var name, type, contentType: String?
     var order: Int?
     var content: [ContentEntity]?
+    var normalizedType: String {
+        (type ?? "")
+            .replacingOccurrences(of: " ", with: "_")
+            .lowercased()
+    }
 }
 
 struct ContentEntity: Hashable {

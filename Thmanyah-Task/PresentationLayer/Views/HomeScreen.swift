@@ -34,14 +34,15 @@ struct HomeScreen: View {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack(spacing: 12) {
                                         ForEach(section.content ?? [], id: \.self) { content in
-                                            switch section.type {
-            
+                                            
+                                            switch section.normalizedType {
+                                   
                                             case "square":
-                                                ContentSquareCell(content: content)
+                                                SquareContentCell(content: content)
                                                     .frame(width: UIScreen.main.bounds.width / 3.2)
 
                                             case "queue":
-                                                ContentQueueCell(content: content)
+                                                QueueContentCell(content: content)
                                                     .frame(width: UIScreen.main.bounds.width * 0.75)
 
                                             default:
