@@ -12,7 +12,8 @@ import SwiftUI
     
     var homeResponse = SectionsResponseEntity()
     var isLoading: Bool = false
-    
+    var isRefreshing: Bool = false
+
     private let useCase: HomeUseCase
     
     init(useCase: HomeUseCase) {
@@ -49,6 +50,8 @@ import SwiftUI
     }
     
     func refresh() async {
+        isRefreshing = true
+        defer { isRefreshing = false }
         useCase.resetPagination()
         await getSections()
     }

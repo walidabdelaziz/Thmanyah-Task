@@ -18,35 +18,38 @@ struct HomeScreen: View {
                 LazyVStack(spacing: 16) {
                     headerView
                     
-                    if let sections = vm.homeResponse.sections {
-                        ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
-                            SectionView(section: section)
-                                .onAppear {
-                                    if index == sections.count - 1 {
-                                        Task {
-                                            await vm.loadMore()
-                                        }
-                                    }
-                                }
-                        }
-                    }
-                    
-                    if vm.isLoading {
-                        IndicatorLoaderView()
-                    }
-
+                    contentSections
                 }
+                .padding(.bottom, 16)
             }
         }
         .toolbarVisibility(.hidden, for: .navigationBar)
         .task {
-            Task{
-                await vm.getSections()
-            }
+            await vm.getSections()
         }
         .refreshable {
-            Task{
-                await vm.refresh()
+            await vm.refresh()
+        }
+        .overlay {
+            if vm.isLoading && !vm.isRefreshing {
+                IndicatorLoaderView()
+            }
+        }
+    }
+    
+    private var contentSections: some View {
+        Group {
+            if let sections = vm.homeResponse.sections {
+                ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
+                    SectionView(section: section)
+                        .onAppear {
+                            if index == sections.count - 2 && !vm.isLoading {
+                                Task {
+                                    await vm.loadMore()
+                                }
+                            }
+                        }
+                }
             }
         }
     }
