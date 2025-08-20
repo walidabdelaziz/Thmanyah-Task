@@ -9,11 +9,12 @@ import SwiftUI
 
 struct QueueContentCell: View {
     var content: ContentEntity = .mock
-    
+    var dynamicSize: CGFloat = .dynamicSize(scale: 0.25)
+
     var body: some View {
           HStack(spacing: 8) {
               ImageLoaderView(image: content.avatarURL ?? "")
-                  .frame(width: .dynamicSize(),height: .dynamicSize())
+                  .frame(width: dynamicSize,height: dynamicSize)
 
               contentInfoSection
                   .frame(maxWidth: .infinity,alignment: .leading)
@@ -37,10 +38,6 @@ struct QueueContentCell: View {
             Text(content.name ?? "")
                 .font(.ibmBold(.caption))
                 .lineLimit(1)
-
-            Text(content.description?.cleanedHTML() ?? "")
-                .font(.ibmSemiBold(.caption2))
-                .lineLimit(2)
             
             HStack(spacing: 4){
                 Text(content.duration?.asDurationReadable ?? "")

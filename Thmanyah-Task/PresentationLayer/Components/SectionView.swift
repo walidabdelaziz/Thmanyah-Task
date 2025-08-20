@@ -11,7 +11,7 @@ struct SectionView: View {
     let section: SectionEntity
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        LazyVStack(alignment: .leading, spacing: 12) {
             Text(section.name ?? "No Title")
                 .font(.ibmSemiBold(.title3))
                 .foregroundStyle(.appWhite)
@@ -31,9 +31,9 @@ struct SectionView: View {
         case "2_lines_grid":
             twoLineGridView
         case "big_square", "square", "queue":
-            horizontalScrollView
+            normalGridView
         default:
-            horizontalScrollView
+            normalGridView
         }
     }
     private var twoLineGridView: some View {
@@ -55,7 +55,7 @@ struct SectionView: View {
             }
         }
     }
-    private var horizontalScrollView: some View {
+    private var normalGridView: some View {
         LazyHStack(spacing: 12) {
             ForEach(section.content ?? []) { content in
                 switch section.normalizedType {
