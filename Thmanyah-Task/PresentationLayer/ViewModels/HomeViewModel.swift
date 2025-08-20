@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 @Observable class HomeViewModel {
     
-    var homeResponse = SectionsResponseEntity()
+    var results: SectionsResponseEntity?
     var isLoading: Bool = false
     var isRefreshing: Bool = false
 
@@ -27,7 +27,7 @@ import SwiftUI
             var response = try await useCase.execute(page: 1)
             // Sort sections by order
             response.sections = response.sections?.sorted { ($0.order ?? 0) < ($1.order ?? 0) }
-            homeResponse = response
+            results = response
         } catch {
             print("Error: \(error)")
         }
@@ -41,8 +41,8 @@ import SwiftUI
             if var nextResponse = try await useCase.loadNextPage() {
                 // Sort the new page sections by order
                 nextResponse.sections = nextResponse.sections?.sorted { ($0.order ?? 0) < ($1.order ?? 0) }
-                homeResponse.sections?.append(contentsOf: nextResponse.sections ?? [])
-                homeResponse.pagination = nextResponse.pagination
+                results?.sections?.append(contentsOf: nextResponse.sections ?? [])
+                results?.pagination = nextResponse.pagination
             }
         } catch {
             print("Error loading more: \(error)")

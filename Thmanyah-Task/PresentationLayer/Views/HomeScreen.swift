@@ -39,7 +39,7 @@ struct HomeScreen: View {
     
     private var contentSections: some View {
         Group {
-            if let sections = vm.homeResponse.sections {
+            if let sections = vm.results?.sections {
                 ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
                     SectionView(section: section)
                         .onAppear {
