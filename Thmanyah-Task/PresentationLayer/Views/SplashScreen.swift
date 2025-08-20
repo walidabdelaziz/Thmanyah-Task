@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SplashScreen: View {
     
-    @State var navigateToHomeScreen: Bool = false
+    @State var navigateToMainScreen: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -18,14 +18,14 @@ struct SplashScreen: View {
                     .ignoresSafeArea()
                 Image("thmanyah_logo")
             }
-            .navigationDestination(isPresented: $navigateToHomeScreen) {
-                HomeScreen()
+            .navigationDestination(isPresented: $navigateToMainScreen) {
+                TabbarScreen()
             }
         }
         .onAppear {
             Task {
                 try await Task.sleep(nanoseconds: 2_000_000_000)
-                navigateToHomeScreen = true
+                navigateToMainScreen = true
             }
         }
     }

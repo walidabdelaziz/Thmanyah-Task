@@ -60,24 +60,8 @@ extension String {
         return self
     }
     
-    func cleanedHTML() -> String {
-        var text = self
-
-        text = text.replacingOccurrences(of: "\n", with: " ")
-        text = text.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
-
-        if let data = text.data(using: .utf8) {
-            let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-                .documentType: NSAttributedString.DocumentType.html,
-                .characterEncoding: String.Encoding.utf8.rawValue
-            ]
-            if let attributed = try? NSAttributedString(data: data, options: options, documentAttributes: nil) {
-                text = attributed.string
-            }
-        }
-        return text.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
 }
+
 extension CGFloat {
     static func dynamicSize(
         scale: CGFloat = 0.3,
