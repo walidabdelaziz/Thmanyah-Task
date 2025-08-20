@@ -12,11 +12,9 @@ protocol HomeUseCase {
 }
 
 class HomeUseCaseImpl: HomeUseCase {
-    
     private let repository: HomeRepository
     private var currentPage = 1
     private var totalPages: Int? = nil
-    
     init(repository: HomeRepository = HomeRepositoryImpl()) {
         self.repository = repository
     }
