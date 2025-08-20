@@ -22,7 +22,7 @@ struct PaginationDTO: Codable {
 
 struct SectionDTO: Codable {
     var name, type, contentType: String?
-    var order: Int?
+    var order: FlexibleValue?
     var content: [ContentDTO]?
 
     enum CodingKeys: String, CodingKey {
@@ -35,22 +35,22 @@ struct SectionDTO: Codable {
 struct ContentDTO: Codable {
     var podcastID, name, description: String?
     var avatarURL: String?
-    var episodeCount, duration: Int?
+    var episodeCount, duration: FlexibleValue?
     var language: String?
-    var priority, popularityScore: Int?
-    var score: Double?
-    var podcastPopularityScore, podcastPriority: Int?
+    var priority, popularityScore: FlexibleValue?
+    var score: FlexibleValue?
+    var podcastPopularityScore, podcastPriority: FlexibleValue?
     var episodeID: String?
-    var seasonNumber: Int?
+    var seasonNumber: FlexibleValue?
     var episodeType: String?
     var podcastName: String?
     var authorName: String?
-    var number: Int?
+    var number: FlexibleValue?
     var separatedAudioURL, audioURL: String?
     var releaseDate: String?
     var paidIsEarlyAccess, paidIsNowEarlyAccess, paidIsExclusive: Bool?
     var paidIsExclusivePartially: Bool?
-    var paidExclusiveStartTime: Int?
+    var paidExclusiveStartTime: FlexibleValue?
     var audiobookID: String?
     var articleID: String?
 
@@ -100,7 +100,7 @@ extension SectionDTO{
             name: name,
             type: type,
             contentType: contentType,
-            order: order ?? 0,
+            order: order?.intValue ?? 0,
             content: content?.map{$0.toDomain()}
         )
     }
@@ -112,20 +112,20 @@ extension ContentDTO{
             name: name,
             description: description,
             avatarURL: avatarURL,
-            episodeCount: episodeCount,
-            duration: duration,
+            episodeCount: episodeCount?.intValue,
+            duration: duration?.intValue,
             language: language,
-            priority: priority,
-            popularityScore: popularityScore,
-            score: score,
-            podcastPopularityScore: podcastPopularityScore,
-            podcastPriority: podcastPriority,
+            priority: priority?.intValue,
+            popularityScore: popularityScore?.intValue,
+            score: score?.doubleValue,
+            podcastPopularityScore: podcastPopularityScore?.intValue,
+            podcastPriority: podcastPriority?.intValue,
             episodeID: episodeID,
-            seasonNumber: seasonNumber,
+            seasonNumber: seasonNumber?.intValue,
             episodeType: episodeType,
             podcastName: podcastName,
             authorName: authorName,
-            number: number,
+            number: number?.intValue,
             separatedAudioURL: separatedAudioURL,
             audioURL: audioURL,
             releaseDate: releaseDate,
@@ -133,7 +133,7 @@ extension ContentDTO{
             paidIsNowEarlyAccess: paidIsNowEarlyAccess,
             paidIsExclusive: paidIsExclusive,
             paidIsExclusivePartially: paidIsExclusivePartially,
-            paidExclusiveStartTime: paidExclusiveStartTime,
+            paidExclusiveStartTime: paidExclusiveStartTime?.intValue,
             audiobookID: audiobookID,
             articleID: articleID,
         )
