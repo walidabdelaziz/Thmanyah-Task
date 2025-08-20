@@ -23,7 +23,10 @@ import SwiftUI
         isLoading = true
         defer { isLoading = false }
         do {
-            homeResponse = try await useCase.execute(page: 1)
+            var response = try await useCase.execute(page: 1)
+            // Sort sections by order
+            response.sections = response.sections?.sorted { ($0.order ?? 0) < ($1.order ?? 0) }
+            homeResponse = response
         } catch {
             print("Error: \(error)")
         }
@@ -34,7 +37,9 @@ import SwiftUI
         isLoading = true
         defer { isLoading = false }
         do {
-            if let nextResponse = try await useCase.loadNextPage() {
+            if var nextResponse = try await useCase.loadNextPage() {
+                // Sort the new page sections by order
+                nextResponse.sections = nextResponse.sections?.sorted { ($0.order ?? 0) < ($1.order ?? 0) }
                 homeResponse.sections?.append(contentsOf: nextResponse.sections ?? [])
                 homeResponse.pagination = nextResponse.pagination
             }
