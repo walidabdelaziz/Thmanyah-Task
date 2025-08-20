@@ -29,24 +29,33 @@ struct SectionView: View {
     private var contentScroll: some View {
         switch section.normalizedType {
         case "2_lines_grid":
-            twoLineGrid
+            twoLineGridView
         case "big_square", "square", "queue":
-            horizontalScroll
-        default: EmptyView()
+            horizontalScrollView
+        default:
+            horizontalScrollView
         }
     }
-    private var twoLineGrid: some View {
+    private var twoLineGridView: some View {
         let numberOfRows = min(2, max(1, (section.content?.count ?? 1 + 1) / 2))
-        let rows = Array(repeating: GridItem(.fixed(120), spacing: 12), count: numberOfRows)
+        let rows = Array(repeating: GridItem(.flexible(), spacing: 12), count: numberOfRows)
         
         return LazyHGrid(rows: rows, spacing: 12) {
             ForEach(section.content ?? []) { content in
-                TwoLineGridContentCell(content: content)
-                    .frame(width: 180, height: 120)
+                TwoLineGridContentCell(
+                    content: content,
+                    onEllipsisPressed: {
+                        
+                    },
+                    onHorizontalLinePressed: {
+                        
+                    }
+                )
+                .frame(width: UIScreen.main.bounds.width * 0.75)
             }
         }
     }
-    private var horizontalScroll: some View {
+    private var horizontalScrollView: some View {
         LazyHStack(spacing: 12) {
             ForEach(section.content ?? []) { content in
                 switch section.normalizedType {
@@ -60,7 +69,8 @@ struct SectionView: View {
                     QueueContentCell(content: content)
                         .frame(width: UIScreen.main.bounds.width * 0.75)
                 default:
-                    EmptyView()
+                    SquareContentCell(content: content)
+                        .frame(width: UIScreen.main.bounds.width / 3.2)
                 }
             }
         }
