@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct Thmanyah_TaskApp: App {
+    init() {
+        let refreshControlAppearance = UIRefreshControl.appearance()
+        refreshControlAppearance.tintColor = .appRed
+    }
+
     var body: some Scene {
         WindowGroup {
             SplashScreen()

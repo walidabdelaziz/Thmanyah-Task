@@ -32,19 +32,22 @@ struct HomeScreen: View {
                     }
                     
                     if vm.isLoading {
-                        ProgressView("Loading more...")
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding()
+                        IndicatorLoaderView()
                     }
+
                 }
             }
         }
         .toolbarVisibility(.hidden, for: .navigationBar)
         .task {
-            await vm.getSections()
+            Task{
+                await vm.getSections()
+            }
         }
         .refreshable {
-            await vm.refresh()
+            Task{
+                await vm.refresh()
+            }
         }
     }
     
