@@ -22,7 +22,7 @@ struct TabbarScreen: View {
                 }
                 .tag(0)
             
-            HomeScreen()
+            SearchScreen()
                 .tabItem {
                     Image(systemName: "magnifyingglass")
                     Text("Search")

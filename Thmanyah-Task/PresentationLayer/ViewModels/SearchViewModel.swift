@@ -12,7 +12,7 @@ import SwiftUI
     var query: String = "" {
         didSet { onQueryChanged() }
     }
-    var results = [SectionEntity]()
+    var sections = [SectionEntity]()
     var isLoading = false
 
     private let useCase: SearchUseCase
@@ -37,7 +37,7 @@ import SwiftUI
         defer { isLoading = false }
         do {
             let response = try await useCase.execute()
-            results = response.sections ?? []
+            sections = response.sections ?? []
         } catch {
             print("Error: \(error)")
         }
