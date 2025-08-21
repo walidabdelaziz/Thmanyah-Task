@@ -13,6 +13,7 @@ import SwiftUI
         didSet { onQueryChanged() }
     }
     var sections = [SectionEntity]()
+    private var allSections = [SectionEntity]()
     var isLoading = false
 
     private let useCase: SearchUseCase
@@ -26,9 +27,16 @@ import SwiftUI
         searchTask?.cancel()
         
         searchTask = Task { [weak self] in
+            guard let self else { return }
+            
             try? await Task.sleep(nanoseconds: 200_000_000)
-            guard let self, !Task.isCancelled, !query.isEmpty else { return }
-            await performSearch()
+            guard !Task.isCancelled else { return }
+
+            if query.isEmpty {
+                sections = allSections
+            } else {
+                await performSearch()
+            }
         }
     }
 
@@ -37,7 +45,15 @@ import SwiftUI
         defer { isLoading = false }
         do {
             let response = try await useCase.execute()
-            sections = response.sections ?? []
+            let resultSections = response.sections ?? []
+            
+            if query.isEmpty {
+                // cache full list
+                allSections = resultSections
+                sections = allSections
+            } else {
+                sections = resultSections
+            }
         } catch {
             print("Error: \(error)")
         }
