@@ -51,12 +51,10 @@ struct ProfileScreen: View {
             CustomSegementControlView(
                 items: AppThemes.allCases,
                 selectedItem: $selectedTheme,
-                label: { LocalizedStringKey($0.rawValue.capitalized) }, // <- localized
+                label: { LocalizedStringKey($0.rawValue.capitalized) },
                 onItemSelected: { theme in
-                    if selectedTheme != theme {
-                        selectedTheme = theme
-                        updateStorage(for: theme)
-                    }
+                    selectedTheme = theme
+                    updateStorage(for: theme)
                 }
             )
         }
@@ -71,12 +69,10 @@ struct ProfileScreen: View {
             CustomSegementControlView(
                 items: AppLanguages.allCases,
                 selectedItem: $selectedLanguage,
-                label: { LocalizedStringKey($0.title) }, // <- localized
+                label: { LocalizedStringKey($0.title) },
                 onItemSelected: { language in
-                    if selectedLanguage != language {
-                        selectedLanguage = language
-                        updateLanguage(for: language)
-                    }
+                    selectedLanguage = language
+                    updateLanguage(for: language)
                 }
             )
         }

@@ -33,10 +33,9 @@ struct CustomSegementControlView<T: Hashable>: View {
                         }
                     )
                     .onTapGesture {
+                        guard selectedItem != item else { return }
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            if selectedItem != item {
-                                onItemSelected?(item)
-                            }
+                            onItemSelected?(item)
                         }
                     }
             }

@@ -27,6 +27,10 @@ struct SearchScreen: View {
             if vm.isLoading {
                 IndicatorLoaderView()
             }
+            if vm.sections.isEmpty && vm.isLoading == false{
+                ContentUnavailableView("No search results available, please try again later", systemImage: "magnifyingglass")
+                    .foregroundStyle(Color.appWhite)
+            }
         }
     }
     
@@ -78,5 +82,8 @@ struct SearchScreen: View {
 
 
 #Preview {
-    SearchScreen()
+    ZStack{
+        Color.black.ignoresSafeArea()
+        SearchScreen()
+    }
 }

@@ -74,6 +74,16 @@
         }
       }
     },
+    "No search results available, please try again later" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا توجد نتائج بحث متاحة، يرجى المحاولة مرة أخرى لاحقًا"
+          }
+        }
+      }
+    },
     "Profile" : {
       "localizations" : {
         "ar" : {
