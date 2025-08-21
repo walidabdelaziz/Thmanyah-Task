@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeScreen: View {
     @State private var vm = HomeViewModel(useCase: HomeUseCaseImpl())
+    @AppStorage("appLanguage") private var appLanguage: String = "english"
     
     var body: some View {
         ZStack {
@@ -55,8 +56,9 @@ struct HomeScreen: View {
     }
     
     private var headerView: some View {
-        HomeHeaderView(
-            title: "Welcome, Walid",
+        let name = "Walid"
+        return HomeHeaderView(
+            title: "Welcome \(name)",
             notificationCount: 4,
             onNotificationPressed: {}
         )

@@ -11,7 +11,7 @@ struct CustomSegementControlView<T: Hashable>: View {
     @Namespace var namespace
     var items: [T]
     @Binding var selectedItem: T?
-    var label: (T) -> String
+    var label: (T) -> LocalizedStringKey
     var onItemSelected: ((T) -> Void)? = nil
 
     var body: some View {
@@ -33,7 +33,9 @@ struct CustomSegementControlView<T: Hashable>: View {
                     )
                     .onTapGesture {
                         withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                            onItemSelected?(item)
+                            if selectedItem != item {
+                                onItemSelected?(item)
+                            }
                         }
                     }
             }
@@ -51,7 +53,7 @@ struct CustomSegementControlView<T: Hashable>: View {
     CustomSegementControlView(
         items: AppThemes.allCases,
         selectedItem: $selectedItem,
-        label: {$0.rawValue.capitalized},
+        label: { LocalizedStringKey($0.rawValue) },
         onItemSelected: { item in
             selectedItem = item
         }

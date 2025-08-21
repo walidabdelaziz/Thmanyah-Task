@@ -6,61 +6,86 @@
 //
 
 import SwiftUI
-
 struct ProfileScreen: View {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = true
+    @AppStorage("appLanguage") private var appLanguage: String = AppLanguages.english.rawValue
+
     @State private var selectedTheme: AppThemes? = .dark
+    @State private var selectedLanguage: AppLanguages? = .english
 
     var body: some View {
-        VStack{
+        VStack {
             headerView
-            
+
             darkModeSection
-                .padding()
-         
+                .padding(.horizontal)
             
+            languageSection
+                .padding(.horizontal)
+
             Spacer()
         }
         .foregroundStyle(.appWhite)
-        .onAppear{
+        .onAppear {
             selectedTheme = isDarkMode ? .dark : .light
+            selectedLanguage = AppLanguages(rawValue: appLanguage) ?? .english
         }
         .preferredColorScheme(isDarkMode ? .dark : .light)
         .animation(.easeInOut, value: isDarkMode)
-    }
-    private func updateStorage(for theme: AppThemes) {
-        switch theme {
-        case .dark:
-            isDarkMode = true
-        case .light:
-            isDarkMode = false
-        }
     }
     private var headerView: some View {
         Text("Profile")
             .font(.ibmSemiBold(.title2))
             .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
+            .padding()
     }
-    private var darkModeSegementControl: some View {
-        CustomSegementControlView(
-            items: AppThemes.allCases,
-            selectedItem: $selectedTheme,
-            label: {$0.rawValue.capitalized},
-            onItemSelected: { theme in
-                selectedTheme = theme
-                updateStorage(for: theme)
-            }
-        )
-    }
+
     private var darkModeSection: some View {
-        HStack{
-            Text("Dark Mode")
+        HStack {
+            Text("App Theme")
                 .font(.ibmSemiBold(.headline))
                 .frame(maxWidth: .infinity, alignment: .leading)
+
             
-            darkModeSegementControl
+            CustomSegementControlView(
+                items: AppThemes.allCases,
+                selectedItem: $selectedTheme,
+                label: { LocalizedStringKey($0.rawValue.capitalized) }, // <- localized
+                onItemSelected: { theme in
+                    if selectedTheme != theme {
+                        selectedTheme = theme
+                        updateStorage(for: theme)
+                    }
+                }
+            )
         }
+    }
+
+    private var languageSection: some View {
+        HStack {
+            Text("Language")
+                .font(.ibmSemiBold(.headline))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            CustomSegementControlView(
+                items: AppLanguages.allCases,
+                selectedItem: $selectedLanguage,
+                label: { LocalizedStringKey($0.title) }, // <- localized
+                onItemSelected: { language in
+                    if selectedLanguage != language {
+                        selectedLanguage = language
+                        updateLanguage(for: language)
+                    }
+                }
+            )
+        }
+    }
+    private func updateStorage(for theme: AppThemes) {
+        isDarkMode = (theme == .dark)
+    }
+
+    private func updateLanguage(for language: AppLanguages) {
+        appLanguage = language.rawValue
     }
 }
 

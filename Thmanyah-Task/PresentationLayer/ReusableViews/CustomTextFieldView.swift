@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomTextFieldView: View {
     @Binding var text: String
-    var placeholder: String = "Search here"
+    var placeholder: LocalizedStringKey = "Search here"
     
     var body: some View {
         TextField(

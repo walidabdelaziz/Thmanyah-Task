@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeHeaderView: View {
-    var title: String = "Welcome"
+    var title: LocalizedStringKey = "Welcome"
     var notificationCount: Int? = 1
     var onNotificationPressed: (() -> Void)? = nil
     var body: some View {

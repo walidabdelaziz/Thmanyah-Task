@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct Thmanyah_TaskApp: App {
     @AppStorage("isDarkMode") private var isDarkMode: Bool = true
+    @AppStorage("appLanguage") private var appLanguage: String = "en"
 
     init() {
         let refreshControlAppearance = UIRefreshControl.appearance()
@@ -20,6 +21,8 @@ struct Thmanyah_TaskApp: App {
         WindowGroup {
             SplashScreen()
                 .preferredColorScheme(isDarkMode ? .dark : .light)
+                .environment(\.locale, Locale(identifier: appLanguage))
+                .environment(\.layoutDirection, appLanguage == "en" ? .leftToRight : .rightToLeft)
         }
     }
 }
