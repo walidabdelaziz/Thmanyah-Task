@@ -9,21 +9,30 @@ import SwiftUI
 
 struct SectionView: View {
     let section: SectionEntity
-    
-    var body: some View {
-        LazyVStack(alignment: .leading, spacing: 12) {
-            Text(section.name ?? "No Title")
-                .font(.ibmSemiBold(.title3))
-                .foregroundStyle(.appWhite)
-                .padding(.horizontal)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                contentScroll
+    @Environment(\.layoutDirection) private var layoutDirection
+
+        var body: some View {
+            LazyVStack(alignment: .leading, spacing: 12) {
+                Text(section.name ?? "No Title")
+                    .font(.ibmSemiBold(.title3))
+                    .foregroundStyle(.appWhite)
                     .padding(.horizontal)
+                
+                ScrollViewReader { proxy in
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        contentScroll
+                            .padding(.horizontal)
+                    }
+                    .onChange(of: layoutDirection) {
+                        withAnimation {
+                            if let firstId = section.content?.first?.id {
+                                proxy.scrollTo(firstId, anchor: .leading)
+                            }
+                        }
+                    }
+                }
             }
-            
         }
-    }
     
     @ViewBuilder
     private var contentScroll: some View {
@@ -51,6 +60,7 @@ struct SectionView: View {
                         
                     }
                 )
+                .id(content.id)
                 .frame(width: UIScreen.main.bounds.width * 0.75)
             }
         }
@@ -61,15 +71,19 @@ struct SectionView: View {
                 switch section.normalizedType {
                 case "big_square":
                     BigSquareContentCell(content: content)
+                        .id(content.id)
                         .frame(width: UIScreen.main.bounds.width / 1.75)
                 case "square":
                     SquareContentCell(content: content)
+                        .id(content.id)
                         .frame(width: UIScreen.main.bounds.width / 3.2)
                 case "queue":
                     QueueContentCell(content: content)
+                        .id(content.id)
                         .frame(width: UIScreen.main.bounds.width * 0.75)
                 default:
                     SquareContentCell(content: content)
+                        .id(content.id)
                         .frame(width: UIScreen.main.bounds.width / 3.2)
                 }
             }
