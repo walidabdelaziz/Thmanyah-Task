@@ -6,21 +6,18 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct SearchScreen: View {
     @State private var vm = SearchViewModel(useCase: SearchUseCaseImpl())
+    @State var headerFrame: CGRect = .zero
+    @State var scrollViewOffset: CGFloat = 0
+    
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Color.appBlack.ignoresSafeArea()
-            
-            ScrollView(.vertical, showsIndicators: false) {
-                LazyVStack(spacing: 16) {
-                    headerView
-                    
-                    contentSections
-                }
-                .padding(.bottom, 16)
-            }
+            scrollViewContent
+            headerView
         }
         .toolbarVisibility(.hidden, for: .navigationBar)
         .task {
@@ -33,6 +30,24 @@ struct SearchScreen: View {
         }
     }
     
+    private var scrollViewContent: some View {
+        ScrollViewWithOnScrollChanged(
+            .vertical,
+            showsIndicators: false) {
+                LazyVStack(spacing: 16){
+                    
+                    Rectangle()
+                        .fill(.appBlack.opacity(0.000001))
+                        .frame(height: headerFrame.height)
+                    
+                    contentSections
+                }
+                .padding(.bottom, 16)
+                
+            } onScrollChanged: { origin in
+                scrollViewOffset = min(0, origin.y)
+            }
+    }
     private var contentSections: some View {
         ForEach(Array(vm.sections.enumerated()), id: \.offset) { index, section in
             SectionView(section: section)
@@ -40,8 +55,24 @@ struct SearchScreen: View {
     }
     
     private var headerView: some View {
-        CustomTextFieldView(text: $vm.query, placeholder: "Search here")
+        CustomTextFieldView(text: $vm.query, placeholder: "Explore more")
         .padding()
+        .readingFrame { frame in
+            if headerFrame == .zero {
+                headerFrame = frame
+            }
+        }
+        .background(
+            ZStack{
+                if scrollViewOffset < -30{
+                    MaterialBackgroundView(
+                        material: .ultraThinMaterial,
+                        brightness: -0.2
+                    )
+                }
+            }
+        )
+        
     }
 }
 
