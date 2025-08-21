@@ -12,6 +12,7 @@ struct ProfileScreen: View {
 
     @State private var selectedTheme: AppThemes? = .dark
     @State private var selectedLanguage: AppLanguages? = .english
+    @Binding var selectedTabbarIndex: Int
 
     var body: some View {
         VStack {
@@ -86,9 +87,11 @@ struct ProfileScreen: View {
 
     private func updateLanguage(for language: AppLanguages) {
         appLanguage = language.rawValue
+        selectedTabbarIndex = 0
     }
 }
 
 #Preview {
-    ProfileScreen()
+    @Previewable @State var selectedTab: Int = 2
+    ProfileScreen(selectedTabbarIndex: $selectedTab)
 }

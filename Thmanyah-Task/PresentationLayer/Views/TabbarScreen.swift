@@ -29,7 +29,7 @@ struct TabbarScreen: View {
                 }
                 .tag(1)
             
-            ProfileScreen()
+            ProfileScreen(selectedTabbarIndex: $selectedTab)
                 .tabItem {
                     Image(systemName: "person")
                     Text("Profile")
