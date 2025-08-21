@@ -4,11 +4,13 @@
 
 ## 🚀 Features
 
-- Home screen displaying multiple sections of content (movies, series, podcasts, etc.) with **pagination** support.
-- Separate **Search screen** to quickly find content.
+- Home screen displaying multiple dynamic sections of different views (movies, series, podcasts, etc.) with **pagination** support
+- Separate **Search screen** to quickly find content
 - Support for English and Arabic languages with automatic RTL/LTR adjustment
 - Dark mode and light mode support with custom theme colors
-- Smooth and responsive UI with **SwiftUI**.
+- Smooth animation
+
+---
 
 ## 📱 Screens
 
@@ -16,12 +18,6 @@
 - [x] Home Screen
 - [x] Search Screen 
 - [x] Profile Screen 
-
-## 📋 Requirements
-
-- iOS 18.0+
-- Xcode 15.0+
-- Swift 5+
 
 ---
 
@@ -65,6 +61,14 @@
 ### ✅ Package Management
 
 - Dependencies managed using Swift Package Manager (SPM)
+
+---
+
+## 📋 Requirements
+
+- iOS 18.0+
+- Xcode 15.0+
+- Swift 5+
 
 ---
 
