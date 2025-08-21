@@ -41,6 +41,7 @@ struct HomeHeaderView: View {
             .overlay {
                 Text("\(notificationCount ?? 0)")
                     .font(.ibmRegular(.caption2))
+                    .foregroundStyle(.white)
             }
             .offset(x: 1,y: -2)
     }

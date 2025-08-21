@@ -18,6 +18,7 @@ struct CustomSegementControlView<T: Hashable>: View {
         HStack(spacing: 4) {
             ForEach(items, id: \.self) { item in
                 Text(label(item))
+                    .frame(maxWidth: .infinity)
                     .font(.ibmMedium(.subheadline))
                     .foregroundColor(selectedItem == item ? .white : .gray)
                     .padding(.vertical, 8)
@@ -49,11 +50,11 @@ struct CustomSegementControlView<T: Hashable>: View {
 }
 
 #Preview {
-    @Previewable @State var selectedItem: AppThemes? = .light
+    @Previewable @State var selectedItem: AppLanguages? = .english
     CustomSegementControlView(
-        items: AppThemes.allCases,
+        items: AppLanguages.allCases,
         selectedItem: $selectedItem,
-        label: { LocalizedStringKey($0.rawValue) },
+        label: { LocalizedStringKey($0.title) },
         onItemSelected: { item in
             selectedItem = item
         }
