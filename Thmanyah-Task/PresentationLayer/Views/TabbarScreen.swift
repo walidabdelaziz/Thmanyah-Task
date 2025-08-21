@@ -28,6 +28,13 @@ struct TabbarScreen: View {
                     Text("Search")
                 }
                 .tag(1)
+            
+            ProfileScreen()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Profile")
+                }
+                .tag(2)
         }
         .toolbar(.hidden, for: .navigationBar)
     }

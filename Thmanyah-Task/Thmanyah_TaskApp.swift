@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct Thmanyah_TaskApp: App {
+    @AppStorage("isDarkMode") private var isDarkMode: Bool = true
+
     init() {
         let refreshControlAppearance = UIRefreshControl.appearance()
         refreshControlAppearance.tintColor = .appRed
@@ -17,6 +19,7 @@ struct Thmanyah_TaskApp: App {
     var body: some Scene {
         WindowGroup {
             SplashScreen()
+                .preferredColorScheme(isDarkMode ? .dark : .light)
         }
     }
 }
