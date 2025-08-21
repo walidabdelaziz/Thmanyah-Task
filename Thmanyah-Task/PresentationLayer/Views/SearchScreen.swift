@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SearchScreen: View {
     @State private var vm = SearchViewModel(useCase: SearchUseCaseImpl())
-    
     var body: some View {
         ZStack {
             Color.appBlack.ignoresSafeArea()
@@ -35,19 +34,13 @@ struct SearchScreen: View {
     }
     
     private var contentSections: some View {
-        Group {
-            ForEach(Array(vm.sections.enumerated()), id: \.offset) { index, section in
-                    SectionView(section: section)
-            }
+        ForEach(Array(vm.sections.enumerated()), id: \.offset) { index, section in
+            SectionView(section: section)
         }
     }
     
     private var headerView: some View {
-        HomeHeaderView(
-            title: "Welcome, Walid",
-            notificationCount: 4,
-            onNotificationPressed: {}
-        )
+        CustomTextFieldView(text: $vm.query, placeholder: "Search here")
         .padding()
     }
 }
