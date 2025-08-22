@@ -13,9 +13,13 @@ struct HomeHeaderView: View {
     var onNotificationPressed: (() -> Void)? = nil
     var body: some View {
         HStack(spacing: 4){
-            Image(systemName: "person.circle.fill")
-                .font(.largeTitle)
-                .foregroundStyle(.appRed)
+    
+            Image(systemName: "person.fill")
+                .font(.title3)
+                .foregroundStyle(.white)
+                .padding(10)
+                .background(.appRed)
+                .clipShape(.circle)
             
             Text(title)
                 .font(.ibmSemiBold(.title3))

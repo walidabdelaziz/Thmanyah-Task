@@ -27,7 +27,7 @@ struct QueueContentCell: View {
                   .foregroundStyle(.appDarkBlueGray)
                   .font(.caption)
                   .padding(6)
-                  .background()
+                  .background(.appWhite)
                   .clipShape(Circle())
                   .padding(8)
           }
