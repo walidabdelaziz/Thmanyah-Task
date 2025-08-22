@@ -42,7 +42,7 @@ struct HomeScreen: View {
         Group {
             if let sections = vm.results?.sections {
                 ForEach(Array(sections.enumerated()), id: \.offset) { index, section in
-                    SectionView(section: section)
+                    ContentSectionView(section: section)
                         .onAppear {
                             if index == sections.count - 2 && !vm.isLoading {
                                 Task {

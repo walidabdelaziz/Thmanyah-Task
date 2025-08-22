@@ -1,5 +1,5 @@
 //
-//  SectionView.swift
+//  ContentSectionView.swift
 //  Thmanyah-Task
 //
 //  Created by Walid Ahmed on 20/08/2025.
@@ -7,32 +7,40 @@
 
 import SwiftUI
 
-struct SectionView: View {
+struct ContentSectionView: View {
     let section: SectionEntity
     @Environment(\.layoutDirection) private var layoutDirection
 
         var body: some View {
             LazyVStack(alignment: .leading, spacing: 12) {
-                Text(section.name ?? "No Title")
-                    .font(.ibmSemiBold(.title3))
-                    .foregroundStyle(.appWhite)
-                    .padding(.horizontal)
+                headerView
+                scrollView
+            }
+        }
+    private var headerView: some View {
+        ContentSectionHeaderView(
+            title: section.name ?? "No Title",
+            onArrowPressed: {
                 
-                ScrollViewReader { proxy in
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        contentScroll
-                            .padding(.horizontal)
-                    }
-                    .onChange(of: layoutDirection) {
-                        withAnimation {
-                            if let firstId = section.content?.first?.id {
-                                proxy.scrollTo(firstId, anchor: .leading)
-                            }
-                        }
+            }
+        )
+        .padding(.horizontal)
+    }
+    private var scrollView: some View {
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                contentScroll
+                    .padding(.horizontal)
+            }
+            .onChange(of: layoutDirection) {
+                withAnimation {
+                    if let firstId = section.content?.first?.id {
+                        proxy.scrollTo(firstId, anchor: .leading)
                     }
                 }
             }
         }
+    }
     
     @ViewBuilder
     private var contentScroll: some View {
@@ -98,7 +106,7 @@ struct SectionView: View {
         
         ScrollView{
             LazyVStack{
-                SectionView(
+                ContentSectionView(
                     section: SectionEntity.init(
                         name: "Top Podcasts",
                         type: "square",
@@ -108,7 +116,7 @@ struct SectionView: View {
                     )
                 )
                 
-                SectionView(
+                ContentSectionView(
                     section: SectionEntity.init(
                         name: "Top Podcasts",
                         type: "big square",
@@ -118,7 +126,7 @@ struct SectionView: View {
                     )
                 )
                 
-                SectionView(
+                ContentSectionView(
                     section: SectionEntity.init(
                         name: "Top Podcasts",
                         type: "queue",
@@ -128,7 +136,7 @@ struct SectionView: View {
                     )
                 )
                 
-                SectionView(
+                ContentSectionView(
                     section: SectionEntity.init(
                         name: "Top Podcasts",
                         type: "2_lines_grid",

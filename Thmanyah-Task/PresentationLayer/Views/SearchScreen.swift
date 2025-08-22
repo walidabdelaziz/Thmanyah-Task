@@ -54,7 +54,7 @@ struct SearchScreen: View {
     }
     private var contentSections: some View {
         ForEach(Array(vm.sections.enumerated()), id: \.offset) { index, section in
-            SectionView(section: section)
+            ContentSectionView(section: section)
         }
     }
     
