@@ -9,21 +9,25 @@ import SwiftUI
 
 struct ContentSectionHeaderView: View {
     var title = "Title"
+    var showViewAllArrow: Bool = true
     var onArrowPressed: (() -> Void)? = nil
     var body: some View {
         HStack{
             Text(title)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.ibmSemiBold(.title3))
             
-            Image(systemName: "chevron.right")
-                .padding(8)
-                .offset(x: 8)
-                .flipsForRightToLeftLayoutDirection(true)
-                .onTapGesture {
-                    onArrowPressed?()
-                }
+            if showViewAllArrow{
+                Image(systemName: "chevron.right")
+                    .font(.ibmMedium(.headline))
+                    .padding(8)
+                    .offset(x: 8)
+                    .flipsForRightToLeftLayoutDirection(true)
+                    .onTapGesture {
+                        onArrowPressed?()
+                    }
+            }
         }
-        .font(.ibmSemiBold(.title3))
         .foregroundStyle(.appWhite)
     }
 }

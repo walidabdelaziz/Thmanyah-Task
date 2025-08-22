@@ -39,7 +39,6 @@ struct SearchScreen: View {
             .vertical,
             showsIndicators: false) {
                 LazyVStack(spacing: 16){
-                    
                     Rectangle()
                         .fill(.appBlack.opacity(0.000001))
                         .frame(height: headerFrame.height)
@@ -54,7 +53,7 @@ struct SearchScreen: View {
     }
     private var contentSections: some View {
         ForEach(Array(vm.sections.enumerated()), id: \.offset) { index, section in
-            ContentSectionView(section: section)
+            ContentSectionView(section: section, showViewAllArrow: false)
         }
     }
     

@@ -9,17 +9,19 @@ import SwiftUI
 
 struct ContentSectionView: View {
     let section: SectionEntity
+    var showViewAllArrow: Bool = true
     @Environment(\.layoutDirection) private var layoutDirection
-
-        var body: some View {
-            LazyVStack(alignment: .leading, spacing: 12) {
-                headerView
-                scrollView
-            }
+    
+    var body: some View {
+        LazyVStack(alignment: .leading, spacing: 12) {
+            headerView
+            scrollView
         }
+    }
     private var headerView: some View {
         ContentSectionHeaderView(
             title: section.name ?? "No Title",
+            showViewAllArrow: showViewAllArrow,
             onArrowPressed: {
                 
             }
